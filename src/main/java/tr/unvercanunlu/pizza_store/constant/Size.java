@@ -9,9 +9,9 @@ import lombok.ToString;
 @RequiredArgsConstructor
 public enum Size {
 
-  SMALL(1),
-  MEDIUM(1.5),
-  LARGE(2);
+  SMALL(1.00),
+  MEDIUM(1.50),
+  LARGE(2.00);
 
   private final double multiple;
 

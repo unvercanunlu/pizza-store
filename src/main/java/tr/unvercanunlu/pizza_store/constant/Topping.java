@@ -9,13 +9,13 @@ import lombok.ToString;
 @RequiredArgsConstructor
 public enum Topping {
 
-  PEPPERONI(1),
-  SAUSAGE(3),
-  BACON(3),
-  MEAT(5),
-  MUSHROOM(2),
-  CHICKEN(2),
-  BASIL(1);
+  PEPPERONI(1.00),
+  SAUSAGE(3.00),
+  BACON(3.00),
+  MEAT(5.00),
+  MUSHROOM(2.00),
+  CHICKEN(2.00),
+  BASIL(1.00);
 
   private final double price;
 

@@ -9,9 +9,9 @@ import lombok.ToString;
 @RequiredArgsConstructor
 public enum Crust {
 
-  THIN(2),
-  REGULAR(1),
-  THICK(3);
+  THIN(2.00),
+  REGULAR(1.00),
+  THICK(3.00);
 
   private final double price;
 

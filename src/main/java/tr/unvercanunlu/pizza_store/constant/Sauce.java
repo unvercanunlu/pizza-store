@@ -9,8 +9,8 @@ import lombok.ToString;
 @RequiredArgsConstructor
 public enum Sauce {
 
-  TOMATO(3),
-  BBQ(6);
+  TOMATO(3.00),
+  BBQ(6.00);
 
   private final double price;
 
