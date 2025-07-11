@@ -24,59 +24,59 @@ import tr.unvercanunlu.pizza_store.model.Pizza;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PizzaValidator {
 
-  public static void validateSelectedSize(Size size) {
+  public static void checkSelectedSize(Size size) {
     Optional.ofNullable(size)
         .orElseThrow(() -> new SelectedSizeNotValidException(size));
   }
 
-  public static void validateSelectedCrust(Crust crust) {
+  public static void checkSelectedCrust(Crust crust) {
     Optional.ofNullable(crust)
         .orElseThrow(() -> new SelectedCrustNotValidException(crust));
   }
 
-  public static void validateSelectedCheese(Cheese cheese) {
+  public static void checkSelectedCheese(Cheese cheese) {
     Optional.ofNullable(cheese)
         .orElseThrow(() -> new SelectedCheeseNotValidException(cheese));
   }
 
-  public static void validateSelectedSauce(Sauce sauce) {
+  public static void checkSelectedSauce(Sauce sauce) {
     Optional.ofNullable(sauce)
         .orElseThrow(() -> new SelectedSauceNotValidException(sauce));
   }
 
-  public static void validateSelectedTopping(Topping topping) {
+  public static void checkSelectedTopping(Topping topping) {
     Optional.ofNullable(topping)
         .orElseThrow(() -> new SelectedToppingNotValidException(topping));
   }
 
-  public static void validateSize(Size size) {
+  public static void checkSize(Size size) {
     Optional.ofNullable(size)
         .orElseThrow(() -> new SizeMissingException(size));
   }
 
-  public static void validateCrust(Crust crust) {
+  public static void checkCrust(Crust crust) {
     Optional.ofNullable(crust)
         .orElseThrow(() -> new CrustMissingException(crust));
   }
 
-  public static void validateToppingSize(Pizza pizza) {
+  public static void checkToppingSize(Pizza pizza) {
     if ((pizza != null) && (pizza.getToppings().size() > Config.MAX_TOPPING)) {
       throw new TooMuchToppingsException(pizza.getToppings());
     }
   }
 
-  public static void validatePizzaEmpty(Pizza pizza) {
+  public static void checkPizzaEmpty(Pizza pizza) {
     if ((pizza != null) && (pizza.getCheese() == null) && (pizza.getSauce() == null) && pizza.getToppings().isEmpty()) {
       throw new PizzaEmptyException(pizza);
     }
   }
 
-  public static void validatePizza(Pizza pizza) {
+  public static void checkPizza(Pizza pizza) {
     try {
-      validateSize(pizza.getSize());
-      validateCrust(pizza.getCrust());
-      validateToppingSize(pizza);
-      validatePizzaEmpty(pizza);
+      checkSize(pizza.getSize());
+      checkCrust(pizza.getCrust());
+      checkPizzaEmpty(pizza);
+      checkToppingSize(pizza);
 
     } catch (Exception e) {
       throw new PizzaNotValid(e);

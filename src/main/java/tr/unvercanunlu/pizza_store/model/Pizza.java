@@ -46,60 +46,45 @@ public class Pizza {
     }
 
     public PizzaBuilder crust(Crust crust) {
-      PizzaValidator.validateSelectedCrust(crust);
-
+      PizzaValidator.checkSelectedCrust(crust);
       pizza.setCrust(crust);
-
       return this;
     }
 
     public PizzaBuilder sauce(Sauce sauce) {
-      PizzaValidator.validateSelectedSauce(sauce);
-
+      PizzaValidator.checkSelectedSauce(sauce);
       pizza.setSauce(sauce);
-
       return this;
     }
 
     public PizzaBuilder cheese(Cheese cheese) {
-      PizzaValidator.validateSelectedCheese(cheese);
-
+      PizzaValidator.checkSelectedCheese(cheese);
       pizza.setCheese(cheese);
-
       return this;
     }
 
     public PizzaBuilder size(Size size) {
-      PizzaValidator.validateSelectedSize(size);
-
+      PizzaValidator.checkSelectedSize(size);
       pizza.setSize(size);
-
       return this;
     }
 
     public PizzaBuilder topping(Topping topping) {
-      PizzaValidator.validateSelectedTopping(topping);
-
+      PizzaValidator.checkSelectedTopping(topping);
       pizza.getToppings().add(topping);
-
-      PizzaValidator.validateToppingSize(pizza);
+      PizzaValidator.checkToppingSize(pizza);
 
       return this;
     }
 
     public PizzaBuilder toppings(Topping... toppings) {
-      toppings = Optional.ofNullable(toppings)
-          .orElse(new Topping[0]);
-
-      Arrays.stream(toppings)
-          .forEach(this::topping);
-
+      toppings = Optional.ofNullable(toppings).orElse(new Topping[0]);
+      Arrays.stream(toppings).forEach(this::topping);
       return this;
     }
 
     public Pizza build() {
-      PizzaValidator.validatePizza(pizza);
-
+      PizzaValidator.checkPizza(pizza);
       return pizza;
     }
   }
