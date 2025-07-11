@@ -1,14 +1,15 @@
 package tr.unvercanunlu.pizza_store.service.impl;
 
-import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
-import tr.unvercanunlu.pizza_store.constant.Cheese;
-import tr.unvercanunlu.pizza_store.constant.Crust;
-import tr.unvercanunlu.pizza_store.constant.Sauce;
-import tr.unvercanunlu.pizza_store.constant.Size;
-import tr.unvercanunlu.pizza_store.constant.Topping;
+import java.util.stream.Stream;
 import tr.unvercanunlu.pizza_store.model.Pizza;
+import tr.unvercanunlu.pizza_store.model.Size;
+import tr.unvercanunlu.pizza_store.model.component.Cheese;
+import tr.unvercanunlu.pizza_store.model.component.Component;
+import tr.unvercanunlu.pizza_store.model.component.Crust;
+import tr.unvercanunlu.pizza_store.model.component.Sauce;
+import tr.unvercanunlu.pizza_store.model.component.Topping;
 import tr.unvercanunlu.pizza_store.service.IPizzaService;
 
 public class PizzaService implements IPizzaService {
@@ -37,37 +38,28 @@ public class PizzaService implements IPizzaService {
 
   @Override
   public double calculatePrice(Pizza pizza) {
-    double price = 0;
+    if (pizza == null) {
+      return 0.00;
+    }
 
-    price += Optional.ofNullable(pizza)
-        .map(Pizza::getCrust)
-        .map(Crust::getPrice)
-        .orElse(0.00);
-
-    price += Optional.ofNullable(pizza)
-        .map(Pizza::getSauce)
-        .map(Sauce::getPrice)
-        .orElse(0.00);
-
-    price += Optional.ofNullable(pizza)
-        .map(Pizza::getCheese)
-        .map(Cheese::getPrice)
-        .orElse(0.00);
-
-    price += Optional.ofNullable(pizza)
-        .map(Pizza::getToppings)
-        .stream()
-        .flatMap(Collection::stream)
-        .filter(Objects::nonNull)
-        .mapToDouble(Topping::getPrice)
+    double basePrice = Stream.of(
+            Optional.ofNullable(pizza.getCrust()),
+            Optional.ofNullable(pizza.getSauce()),
+            Optional.ofNullable(pizza.getCheese())
+        ).filter(Optional::isPresent)
+        .map(Optional::get)
+        .mapToDouble(Component::getPrice)
         .sum();
 
-    price *= Optional.ofNullable(pizza)
-        .map(Pizza::getSize)
-        .map(Size::getMultiple)
-        .orElse(1.00);
+    double toppingsPrice = pizza.getToppings()
+        .stream()
+        .filter(Objects::nonNull)
+        .mapToDouble(Component::getPrice)
+        .sum();
 
-    return price;
+    return (basePrice + toppingsPrice) * Optional.ofNullable(pizza.getSize())
+        .map(Size::getPriceMultiplier)
+        .orElse(1.00);
   }
 
 }

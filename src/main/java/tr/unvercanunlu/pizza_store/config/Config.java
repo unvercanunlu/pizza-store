@@ -2,48 +2,14 @@ package tr.unvercanunlu.pizza_store.config;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import tr.unvercanunlu.pizza_store.constant.Crust;
-import tr.unvercanunlu.pizza_store.constant.Size;
+import tr.unvercanunlu.pizza_store.model.Size;
+import tr.unvercanunlu.pizza_store.model.component.Crust;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Config {
 
-  public static final int MAX_TOPPING = 10;
-
-  @NoArgsConstructor(access = AccessLevel.PRIVATE)
-  public static class DefaultSelection {
-
-    public static final Crust CRUST = Crust.REGULAR;
-    public static final Size SIZE = Size.MEDIUM;
-  }
-
-  @NoArgsConstructor(access = AccessLevel.PRIVATE)
-  public static class Description {
-
-    @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class BusinessError {
-
-      public static final String TOPPING_TOO_MUCH = "Too much topping selected: %s";
-      public static final String PIZZA_EMPTY = "Pizza empty: %s";
-    }
-
-    @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class MissingError {
-
-      public static final String CRUST = "Crust missing: %s";
-      public static final String SIZE = "Size missing: %s";
-    }
-
-    @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class NotValidError {
-
-      public static final String PIZZA = "Selected pizza not valid";
-      public static final String CHEESE = "Selected cheese not valid: %s";
-      public static final String CRUST = "Selected crust not valid: %s";
-      public static final String SAUCE = "Selected sauce not valid: %s";
-      public static final String SIZE = "Selected size not valid: %s";
-      public static final String TOPPING = "Selected topping not valid: %s";
-    }
-  }
+  public static final int MAX_TOPPINGS = 10;
+  public static final Crust DEFAULT_CRUST = Crust.REGULAR;
+  public static final Size DEFAULT_SIZE = Size.MEDIUM;
 
 }

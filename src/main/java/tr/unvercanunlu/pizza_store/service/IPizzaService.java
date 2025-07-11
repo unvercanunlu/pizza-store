@@ -1,11 +1,11 @@
 package tr.unvercanunlu.pizza_store.service;
 
-import tr.unvercanunlu.pizza_store.constant.Cheese;
-import tr.unvercanunlu.pizza_store.constant.Crust;
-import tr.unvercanunlu.pizza_store.constant.Sauce;
-import tr.unvercanunlu.pizza_store.constant.Size;
-import tr.unvercanunlu.pizza_store.constant.Topping;
 import tr.unvercanunlu.pizza_store.model.Pizza;
+import tr.unvercanunlu.pizza_store.model.Size;
+import tr.unvercanunlu.pizza_store.model.component.Cheese;
+import tr.unvercanunlu.pizza_store.model.component.Crust;
+import tr.unvercanunlu.pizza_store.model.component.Sauce;
+import tr.unvercanunlu.pizza_store.model.component.Topping;
 
 public interface IPizzaService {
 

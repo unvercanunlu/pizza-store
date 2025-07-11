@@ -1,4 +1,4 @@
-package tr.unvercanunlu.pizza_store.constant;
+package tr.unvercanunlu.pizza_store.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +13,6 @@ public enum Size {
   MEDIUM(1.50),
   LARGE(2.00);
 
-  private final double multiple;
+  private final double priceMultiplier;
 
 }

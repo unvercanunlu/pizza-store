@@ -2,15 +2,14 @@ package tr.unvercanunlu.pizza_store.model;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 import lombok.Data;
-import tr.unvercanunlu.pizza_store.config.Config.DefaultSelection;
-import tr.unvercanunlu.pizza_store.constant.Cheese;
-import tr.unvercanunlu.pizza_store.constant.Crust;
-import tr.unvercanunlu.pizza_store.constant.Sauce;
-import tr.unvercanunlu.pizza_store.constant.Size;
-import tr.unvercanunlu.pizza_store.constant.Topping;
+import tr.unvercanunlu.pizza_store.config.Config;
+import tr.unvercanunlu.pizza_store.model.component.Cheese;
+import tr.unvercanunlu.pizza_store.model.component.Crust;
+import tr.unvercanunlu.pizza_store.model.component.Sauce;
+import tr.unvercanunlu.pizza_store.model.component.Topping;
 import tr.unvercanunlu.pizza_store.validation.PizzaValidator;
 
 @Data
@@ -38,45 +37,45 @@ public class Pizza {
       pizza = new Pizza();
 
       // default values
-      pizza.setSize(DefaultSelection.SIZE);
-      pizza.setCrust(DefaultSelection.CRUST);
+      pizza.setSize(Config.DEFAULT_SIZE);
+      pizza.setCrust(Config.DEFAULT_CRUST);
     }
 
     public PizzaBuilder crust(Crust crust) {
-      PizzaValidator.checkSelectedCrust(crust);
+      PizzaValidator.checkCrust(crust);
       pizza.setCrust(crust);
       return this;
     }
 
     public PizzaBuilder sauce(Sauce sauce) {
-      PizzaValidator.checkSelectedSauce(sauce);
+      PizzaValidator.checkSauce(sauce);
       pizza.setSauce(sauce);
       return this;
     }
 
     public PizzaBuilder cheese(Cheese cheese) {
-      PizzaValidator.checkSelectedCheese(cheese);
+      PizzaValidator.checkCheese(cheese);
       pizza.setCheese(cheese);
       return this;
     }
 
     public PizzaBuilder size(Size size) {
-      PizzaValidator.checkSelectedSize(size);
+      PizzaValidator.checkSize(size);
       pizza.setSize(size);
       return this;
     }
 
     public PizzaBuilder topping(Topping topping) {
-      PizzaValidator.checkSelectedTopping(topping);
+      PizzaValidator.checkTopping(topping);
       pizza.getToppings().add(topping);
       PizzaValidator.checkToppingSize(pizza);
-
       return this;
     }
 
     public PizzaBuilder toppings(Topping... toppings) {
-      toppings = Optional.ofNullable(toppings).orElse(new Topping[0]);
-      Arrays.stream(toppings).forEach(this::topping);
+      Stream.ofNullable(toppings)
+          .flatMap(Arrays::stream)
+          .forEach(this::topping);
       return this;
     }
 

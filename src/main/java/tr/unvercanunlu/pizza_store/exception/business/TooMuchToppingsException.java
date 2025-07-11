@@ -1,10 +1,10 @@
 package tr.unvercanunlu.pizza_store.exception.business;
 
-import java.util.Objects;
 import java.util.Set;
 import lombok.Getter;
-import tr.unvercanunlu.pizza_store.config.Config.Description.BusinessError;
-import tr.unvercanunlu.pizza_store.constant.Topping;
+import tr.unvercanunlu.pizza_store.exception.ErrorMessage;
+import tr.unvercanunlu.pizza_store.model.component.Topping;
+import tr.unvercanunlu.pizza_store.util.ValueUtil;
 
 public class TooMuchToppingsException extends RuntimeException {
 
@@ -12,7 +12,7 @@ public class TooMuchToppingsException extends RuntimeException {
   private final Set<Topping> toppings;
 
   public TooMuchToppingsException(Set<Topping> toppings) {
-    super(BusinessError.TOPPING_TOO_MUCH.formatted(Objects.toString(toppings, "")));
+    super(ErrorMessage.TOPPING_TOO_MUCH.formatted(ValueUtil.toString(toppings)));
 
     this.toppings = toppings;
   }

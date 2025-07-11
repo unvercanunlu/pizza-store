@@ -1,4 +1,4 @@
-package tr.unvercanunlu.pizza_store.constant;
+package tr.unvercanunlu.pizza_store.model.component;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @RequiredArgsConstructor
-public enum Topping {
+public enum Topping implements Component {
 
   PEPPERONI(1.00),
   SAUSAGE(3.00),
@@ -18,5 +18,14 @@ public enum Topping {
   BASIL(1.00);
 
   private final double price;
+
+  public static String getType() {
+    return "topping";
+  }
+
+  @Override
+  public double getPrice() {
+    return price;
+  }
 
 }
