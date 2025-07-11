@@ -27,6 +27,7 @@ public class Config {
     public static class BusinessError {
 
       public static final String TOPPING_TOO_MUCH = "Too much topping selected: %s";
+      public static final String PIZZA_EMPTY = "Pizza empty: %s";
     }
 
     // missing
