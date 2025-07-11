@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import lombok.Data;
-import tr.unvercanunlu.pizza_store.config.Config;
+import tr.unvercanunlu.pizza_store.config.Config.DefaultSelection;
 import tr.unvercanunlu.pizza_store.constant.Cheese;
 import tr.unvercanunlu.pizza_store.constant.Crust;
 import tr.unvercanunlu.pizza_store.constant.Sauce;
@@ -16,7 +16,6 @@ import tr.unvercanunlu.pizza_store.validation.PizzaValidator;
 @Data
 public class Pizza {
 
-  // content
   private Size size;
   private Crust crust;
   private Sauce sauce;
@@ -27,12 +26,10 @@ public class Pizza {
     toppings = new HashSet<>();
   }
 
-  // get new instance of builder
   public static PizzaBuilder builder() {
     return new PizzaBuilder();
   }
 
-  // builder
   public static class PizzaBuilder {
 
     private final Pizza pizza;
@@ -41,8 +38,8 @@ public class Pizza {
       pizza = new Pizza();
 
       // default values
-      pizza.setSize(Config.Default.SIZE);
-      pizza.setCrust(Config.Default.CRUST);
+      pizza.setSize(DefaultSelection.SIZE);
+      pizza.setCrust(DefaultSelection.CRUST);
     }
 
     public PizzaBuilder crust(Crust crust) {

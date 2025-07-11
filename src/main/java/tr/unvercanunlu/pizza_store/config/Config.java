@@ -10,19 +10,16 @@ public class Config {
 
   public static final int MAX_TOPPING = 10;
 
-  // defaults
   @NoArgsConstructor(access = AccessLevel.PRIVATE)
-  public static class Default {
+  public static class DefaultSelection {
 
     public static final Crust CRUST = Crust.REGULAR;
     public static final Size SIZE = Size.MEDIUM;
   }
 
-  // error description
   @NoArgsConstructor(access = AccessLevel.PRIVATE)
   public static class Description {
 
-    // business
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class BusinessError {
 
@@ -30,7 +27,6 @@ public class Config {
       public static final String PIZZA_EMPTY = "Pizza empty: %s";
     }
 
-    // missing
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class MissingError {
 
@@ -38,7 +34,6 @@ public class Config {
       public static final String SIZE = "Size missing: %s";
     }
 
-    // not valid
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class NotValidError {
 
