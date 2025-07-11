@@ -1,19 +1,19 @@
 package tr.unvercanunlu.pizza_store.model;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import tr.unvercanunlu.pizza_store.config.Config;
 import tr.unvercanunlu.pizza_store.constant.Cheese;
 import tr.unvercanunlu.pizza_store.constant.Crust;
 import tr.unvercanunlu.pizza_store.constant.Sauce;
 import tr.unvercanunlu.pizza_store.constant.Size;
 import tr.unvercanunlu.pizza_store.constant.Topping;
-import tr.unvercanunlu.pizza_store.validation.Validator;
+import tr.unvercanunlu.pizza_store.validation.PizzaValidator;
 
 @Data
-@RequiredArgsConstructor
 public class Pizza {
 
   // content
@@ -21,41 +21,10 @@ public class Pizza {
   private Crust crust;
   private Sauce sauce;
   private Cheese cheese;
-  private Set<Topping> toppings = new HashSet<>();
+  private final Set<Topping> toppings;
 
-  // price
-  public double calculatePrice() {
-    Validator.validatePizza(this);
-
-    double price = 0;
-
-    // crust
-    price += crust.getPrice();
-
-    // sauce
-    if (sauce != null) {
-      price += sauce.getPrice();
-    }
-
-    // cheese
-    if (cheese != null) {
-      price += cheese.getPrice();
-    }
-
-    // toppings
-    if (toppings != null) {
-      for (Topping topping : toppings) {
-        // topping
-        if (topping != null) {
-          price += topping.getPrice();
-        }
-      }
-    }
-
-    // size
-    price *= size.getMultiple();
-
-    return price;
+  private Pizza() {
+    toppings = new HashSet<>();
   }
 
   // get new instance of builder
@@ -77,7 +46,7 @@ public class Pizza {
     }
 
     public PizzaBuilder crust(Crust crust) {
-      Validator.validateSelectedCrust(crust);
+      PizzaValidator.validateSelectedCrust(crust);
 
       pizza.setCrust(crust);
 
@@ -85,7 +54,7 @@ public class Pizza {
     }
 
     public PizzaBuilder sauce(Sauce sauce) {
-      Validator.validateSelectedSauce(sauce);
+      PizzaValidator.validateSelectedSauce(sauce);
 
       pizza.setSauce(sauce);
 
@@ -93,7 +62,7 @@ public class Pizza {
     }
 
     public PizzaBuilder cheese(Cheese cheese) {
-      Validator.validateSelectedCheese(cheese);
+      PizzaValidator.validateSelectedCheese(cheese);
 
       pizza.setCheese(cheese);
 
@@ -101,7 +70,7 @@ public class Pizza {
     }
 
     public PizzaBuilder size(Size size) {
-      Validator.validateSelectedSize(size);
+      PizzaValidator.validateSelectedSize(size);
 
       pizza.setSize(size);
 
@@ -109,27 +78,28 @@ public class Pizza {
     }
 
     public PizzaBuilder topping(Topping topping) {
-      Validator.validateSelectedTopping(topping);
+      PizzaValidator.validateSelectedTopping(topping);
 
-      pizza.getToppings()
-          .add(topping);
+      pizza.getToppings().add(topping);
 
-      Validator.validateToppingSize(pizza);
+      PizzaValidator.validateToppingSize(pizza);
 
       return this;
     }
 
     public PizzaBuilder toppings(Topping... toppings) {
-      if (toppings != null) {
-        for (Topping topping : toppings) {
-          topping(topping);
-        }
-      }
+      toppings = Optional.ofNullable(toppings)
+          .orElse(new Topping[0]);
+
+      Arrays.stream(toppings)
+          .forEach(this::topping);
 
       return this;
     }
 
     public Pizza build() {
+      PizzaValidator.validatePizza(pizza);
+
       return pizza;
     }
   }

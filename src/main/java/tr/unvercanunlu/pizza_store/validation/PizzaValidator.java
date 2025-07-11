@@ -1,5 +1,6 @@
 package tr.unvercanunlu.pizza_store.validation;
 
+import java.util.Optional;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import tr.unvercanunlu.pizza_store.config.Config;
@@ -8,6 +9,7 @@ import tr.unvercanunlu.pizza_store.constant.Crust;
 import tr.unvercanunlu.pizza_store.constant.Sauce;
 import tr.unvercanunlu.pizza_store.constant.Size;
 import tr.unvercanunlu.pizza_store.constant.Topping;
+import tr.unvercanunlu.pizza_store.exception.business.PizzaEmptyException;
 import tr.unvercanunlu.pizza_store.exception.business.TooMuchToppingsException;
 import tr.unvercanunlu.pizza_store.exception.invalid.PizzaNotValid;
 import tr.unvercanunlu.pizza_store.exception.invalid.SelectedCheeseNotValidException;
@@ -20,53 +22,52 @@ import tr.unvercanunlu.pizza_store.exception.missing.SizeMissingException;
 import tr.unvercanunlu.pizza_store.model.Pizza;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class Validator {
+public class PizzaValidator {
 
   public static void validateSelectedSize(Size size) {
-    if (size == null) {
-      throw new SelectedSizeNotValidException(size);
-    }
+    Optional.ofNullable(size)
+        .orElseThrow(() -> new SelectedSizeNotValidException(size));
   }
 
   public static void validateSelectedCrust(Crust crust) {
-    if (crust == null) {
-      throw new SelectedCrustNotValidException(crust);
-    }
+    Optional.ofNullable(crust)
+        .orElseThrow(() -> new SelectedCrustNotValidException(crust));
   }
 
   public static void validateSelectedCheese(Cheese cheese) {
-    if (cheese == null) {
-      throw new SelectedCheeseNotValidException(cheese);
-    }
+    Optional.ofNullable(cheese)
+        .orElseThrow(() -> new SelectedCheeseNotValidException(cheese));
   }
 
   public static void validateSelectedSauce(Sauce sauce) {
-    if (sauce == null) {
-      throw new SelectedSauceNotValidException(sauce);
-    }
+    Optional.ofNullable(sauce)
+        .orElseThrow(() -> new SelectedSauceNotValidException(sauce));
   }
 
   public static void validateSelectedTopping(Topping topping) {
-    if (topping == null) {
-      throw new SelectedToppingNotValidException(topping);
-    }
+    Optional.ofNullable(topping)
+        .orElseThrow(() -> new SelectedToppingNotValidException(topping));
+  }
+
+  public static void validateSize(Size size) {
+    Optional.ofNullable(size)
+        .orElseThrow(() -> new SizeMissingException(size));
+  }
+
+  public static void validateCrust(Crust crust) {
+    Optional.ofNullable(crust)
+        .orElseThrow(() -> new CrustMissingException(crust));
   }
 
   public static void validateToppingSize(Pizza pizza) {
-    if (pizza.getToppings().size() > Config.MAX_TOPPING) {
+    if ((pizza != null) && (pizza.getToppings().size() > Config.MAX_TOPPING)) {
       throw new TooMuchToppingsException(pizza.getToppings());
     }
   }
 
-  public static void validateSize(Size size) {
-    if (size == null) {
-      throw new SizeMissingException(size);
-    }
-  }
-
-  public static void validateCrust(Crust crust) {
-    if (crust == null) {
-      throw new CrustMissingException(crust);
+  public static void validatePizzaEmpty(Pizza pizza) {
+    if ((pizza != null) && (pizza.getCheese() == null) && (pizza.getSauce() == null) && pizza.getToppings().isEmpty()) {
+      throw new PizzaEmptyException(pizza);
     }
   }
 
@@ -75,6 +76,7 @@ public class Validator {
       validateSize(pizza.getSize());
       validateCrust(pizza.getCrust());
       validateToppingSize(pizza);
+      validatePizzaEmpty(pizza);
 
     } catch (Exception e) {
       throw new PizzaNotValid(e);
