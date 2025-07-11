@@ -20,18 +20,18 @@ public class Config {
 
   // error description
   @NoArgsConstructor(access = AccessLevel.PRIVATE)
-  public static class ErrorDescription {
+  public static class Description {
 
     // business
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class Business {
+    public static class BusinessError {
 
       public static final String TOPPING_TOO_MUCH = "Too much topping selected: %s";
     }
 
     // missing
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class Missing {
+    public static class MissingError {
 
       public static final String CRUST = "Crust missing: %s";
       public static final String SIZE = "Size missing: %s";
@@ -39,7 +39,7 @@ public class Config {
 
     // not valid
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class NotValid {
+    public static class NotValidError {
 
       public static final String PIZZA = "Selected pizza not valid";
       public static final String CHEESE = "Selected cheese not valid: %s";
