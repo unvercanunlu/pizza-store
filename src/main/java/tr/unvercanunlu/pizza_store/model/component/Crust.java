@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @ToString
-@Getter
 @RequiredArgsConstructor
 public enum Crust implements Component {
 
@@ -13,15 +12,7 @@ public enum Crust implements Component {
   REGULAR(1.00),
   THICK(3.00);
 
+  @Getter
   private final double price;
-
-  public static String getType() {
-    return "crust";
-  }
-
-  @Override
-  public double getPrice() {
-    return price;
-  }
 
 }

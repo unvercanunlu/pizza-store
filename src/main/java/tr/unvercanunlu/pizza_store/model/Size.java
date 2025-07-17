@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @ToString
-@Getter
 @RequiredArgsConstructor
 public enum Size {
 
@@ -13,6 +12,7 @@ public enum Size {
   MEDIUM(1.50),
   LARGE(2.00);
 
+  @Getter
   private final double priceMultiplier;
 
 }

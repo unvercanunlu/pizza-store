@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @ToString
-@Getter
 @RequiredArgsConstructor
 public enum Topping implements Component {
 
@@ -17,15 +16,7 @@ public enum Topping implements Component {
   CHICKEN(2.00),
   BASIL(1.00);
 
+  @Getter
   private final double price;
-
-  public static String getType() {
-    return "topping";
-  }
-
-  @Override
-  public double getPrice() {
-    return price;
-  }
 
 }

@@ -4,11 +4,12 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import tr.unvercanunlu.pizza_store.model.Size;
 import tr.unvercanunlu.pizza_store.model.component.Crust;
+import tr.unvercanunlu.pizza_store.model.component.Topping;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class Config {
+public class AppConfig {
 
-  public static final int MAX_TOPPINGS = 10;
+  public static final int MAX_TOPPINGS = Topping.values().length;
   public static final Crust DEFAULT_CRUST = Crust.REGULAR;
   public static final Size DEFAULT_SIZE = Size.MEDIUM;
 

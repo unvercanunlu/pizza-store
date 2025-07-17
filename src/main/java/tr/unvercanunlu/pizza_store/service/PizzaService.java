@@ -7,11 +7,11 @@ import tr.unvercanunlu.pizza_store.model.component.Crust;
 import tr.unvercanunlu.pizza_store.model.component.Sauce;
 import tr.unvercanunlu.pizza_store.model.component.Topping;
 
-public interface IPizzaService {
+public interface PizzaService {
 
-  Pizza margarita(Size size);
+  Pizza createMargarita(Size size);
 
-  Pizza custom(Size size, Crust crust, Sauce sauce, Cheese cheese, Topping... toppings);
+  Pizza createCustomPizza(Size size, Crust crust, Sauce sauce, Cheese cheese, Topping... toppings);
 
   double calculatePrice(Pizza pizza);
 
