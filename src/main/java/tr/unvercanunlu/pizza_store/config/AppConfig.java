@@ -2,9 +2,9 @@ package tr.unvercanunlu.pizza_store.config;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import tr.unvercanunlu.pizza_store.model.Size;
-import tr.unvercanunlu.pizza_store.model.component.Crust;
-import tr.unvercanunlu.pizza_store.model.component.Topping;
+import tr.unvercanunlu.pizza_store.model.pizza.Size;
+import tr.unvercanunlu.pizza_store.model.pizza.component.Crust;
+import tr.unvercanunlu.pizza_store.model.pizza.component.Topping;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AppConfig {
