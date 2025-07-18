@@ -1,4 +1,4 @@
-package tr.unvercanunlu.pizza_store.model;
+package tr.unvercanunlu.pizza_store.model.pizza;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
