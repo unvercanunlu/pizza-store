@@ -4,12 +4,12 @@ import tr.unvercanunlu.pizza_store.exception.InvalidComponentException;
 import tr.unvercanunlu.pizza_store.exception.InvalidPizzaException;
 import tr.unvercanunlu.pizza_store.exception.InvalidSizeException;
 import tr.unvercanunlu.pizza_store.exception.TooMuchToppingsException;
-import tr.unvercanunlu.pizza_store.model.Pizza;
-import tr.unvercanunlu.pizza_store.model.Size;
-import tr.unvercanunlu.pizza_store.model.component.Cheese;
-import tr.unvercanunlu.pizza_store.model.component.Crust;
-import tr.unvercanunlu.pizza_store.model.component.Sauce;
-import tr.unvercanunlu.pizza_store.model.component.Topping;
+import tr.unvercanunlu.pizza_store.model.pizza.Pizza;
+import tr.unvercanunlu.pizza_store.model.pizza.Size;
+import tr.unvercanunlu.pizza_store.model.pizza.component.Cheese;
+import tr.unvercanunlu.pizza_store.model.pizza.component.Crust;
+import tr.unvercanunlu.pizza_store.model.pizza.component.Sauce;
+import tr.unvercanunlu.pizza_store.model.pizza.component.Topping;
 
 public interface ValidationService {
 

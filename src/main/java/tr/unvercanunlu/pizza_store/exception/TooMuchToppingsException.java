@@ -12,7 +12,10 @@ public class TooMuchToppingsException extends PizzaStoreException {
   private final Set<Topping> toppings;
 
   public TooMuchToppingsException(Set<Topping> toppings) {
-    super(ErrorMessage.TOPPINGS_TOO_MUCH, toppings.stream().map(Topping::name).collect(Collectors.joining(", ")));
+    super(ErrorMessage.TOPPINGS_TOO_MUCH, toppings.stream()
+        .map(Topping::name)
+        .collect(Collectors.joining(", "))
+    );
 
     this.toppings = toppings;
   }
